@@ -12,6 +12,20 @@ pnpm build      # dist/ — client build + SSR build + prerender
 pnpm lint       # tsc --noEmit
 ```
 
+## Deploy (GitHub Pages)
+
+Live at https://am-arjun.github.io/triplei-cma-usa/ — served from the `gh-pages` branch.
+
+```sh
+pnpm build:pages   # builds with base /triplei-cma-usa/
+# then publish dist/ to the gh-pages branch, e.g.:
+cd dist && git init -b gh-pages && git add -A && git commit -m deploy \
+  && git push -f https://github.com/am-arjun/triplei-cma-usa.git gh-pages
+```
+
+The build needs `@elt/tokens` from `../GitHub/elt-prototype` (a local `link:` dependency), so it runs
+locally rather than in GitHub Actions.
+
 ## SEO
 
 - `pnpm build` prerenders the page (`src/entry-server.tsx` → `scripts/prerender.mjs`) so
