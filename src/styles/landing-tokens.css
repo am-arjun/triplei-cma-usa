@@ -1,0 +1,116 @@
+/**
+ * Landing-page tokens.
+ *
+ * The admin DS scale stops at 32px spacing / 20px text; a marketing page needs
+ * display sizes and section rhythm. Every token here aliases an existing DS
+ * atomic / semantic token so nothing is hardcoded in components.
+ */
+:root {
+  /* Layout */
+  --lp-container-max: 1240px;
+  --lp-container-px: var(--atomic-24);
+  --lp-section-py: var(--atomic-80);
+  --lp-section-py-sm: var(--atomic-48);
+
+  /* Gaps beyond the component spacing scale */
+  --lp-gap-md: var(--atomic-24);
+  --lp-gap-lg: var(--atomic-32);
+  --lp-gap-xl: var(--atomic-48);
+  --lp-gap-2xl: var(--atomic-72);
+
+  /* Cards */
+  --lp-card-padding: var(--atomic-24);
+  --lp-card-padding-lg: var(--atomic-28);
+  --lp-card-radius: var(--cr-surface-xlg);      /* 18px */
+  --lp-card-radius-lg: var(--cr-surface-2xl);   /* 22px */
+  --lp-card-radius-xl: var(--cr-surface-3xl);   /* 28px */
+  --lp-card-shadow: var(--elevation-lg);
+
+  /* Type — display scale on top of --text-* */
+  --lp-text-display: var(--atomic-44);
+  --lp-text-h1: var(--atomic-40);
+  --lp-text-h2: var(--atomic-32);
+  --lp-text-h3: var(--type-font-size-3xl);       /* 24px */
+  --lp-text-stat: var(--atomic-36);
+  --lp-text-question: var(--type-font-size-2xl); /* 20px */
+  --lp-text-lead: var(--text-md);                /* 16px */
+  --lp-text-body: var(--text-base);              /* 14px */
+  --lp-lh-tight: 1.15;
+  --lp-lh-snug: 1.3;
+  --lp-lh-body: 1.5;
+  --lp-ls-tight: var(--atomic-ls-4);
+
+  /* Controls */
+  --lp-btn-height-sm: var(--atomic-30);
+  --lp-btn-height: var(--atomic-36);
+  --lp-btn-height-lg: var(--atomic-44);
+  --lp-btn-radius: var(--cr-surface-full);
+  --lp-input-height: 38px;                        /* DS text-input rule */
+  --lp-input-radius: var(--cr-surface-full);
+  --lp-icon-badge: var(--atomic-52);
+  --lp-icon-badge-lg: var(--atomic-80);
+
+  /* Page furniture */
+  --lp-topbar-height: var(--atomic-36);
+  --lp-nav-height: var(--atomic-56);
+  --lp-fab-size: var(--atomic-40);
+
+  /* Brand gradient — Figma "Linear" fill: F66616 (0%) → FA8D27 (100%).
+     FA8D27 has no DS primitive yet, so it is declared once here as a token. */
+  --lp-brand-gradient-start: var(--col-surface-brand-default);
+  --lp-brand-gradient-end: #FA8D27;
+  --lp-brand-gradient: linear-gradient(
+    90deg,
+    var(--lp-brand-gradient-start) 0%,
+    var(--lp-brand-gradient-end) 100%
+  );
+  --lp-brand-arc-line: var(--prim-white-15);
+  --lp-dark-glow: var(--prim-orange-alpha-20);
+  --lp-dark-tint: var(--prim-orange-alpha-5);
+  --lp-grid-line: var(--col-stroke-tertiary);
+  --lp-grid-fade: radial-gradient(ellipse 58% 52% at 50% 50%, transparent 0%, var(--prim-black) 100%);
+  --lp-overlay-bottom: linear-gradient(
+    180deg,
+    var(--prim-black-0, rgba(0 0 0 / 0)) 35%,
+    var(--prim-black-70) 100%
+  );
+}
+
+/* Salary range bar shades (no semantic tint tokens exist in dark scope) */
+:root {
+  --lp-range-low: var(--prim-orange-solid-100);
+  --lp-range-mid: var(--col-surface-brand-default);
+  --lp-range-high: var(--prim-orange-solid-600);
+  --lp-range-marker: var(--prim-white-70);
+}
+
+/* Modal sizing (CLAUDE.md §8 — medium modal 480–560px) */
+:root {
+  --lp-modal-width: 480px;
+  --lp-modal-min-width: 320px;
+  --lp-modal-overlay: rgb(0 0 0 / 0.55);
+}
+
+/* Section rhythm for the taller dark sections */
+:root {
+  --lp-section-py-lg: var(--atomic-96);
+}
+
+/* ── Mobile scale (below Tailwind md / 768px) ──
+   Type and rhythm shrink through the same tokens the components already read. */
+@media (max-width: 767px) {
+  :root {
+    --lp-container-px: var(--atomic-16);
+    --lp-section-py: var(--atomic-48);
+    --lp-section-py-lg: var(--atomic-56);
+    --lp-gap-xl: var(--atomic-32);
+    --lp-gap-2xl: var(--atomic-40);
+    --lp-text-display: var(--atomic-32);
+    --lp-text-h1: var(--atomic-30);
+    --lp-text-h2: var(--type-font-size-3xl);   /* 24px */
+    --lp-text-stat: var(--atomic-28);
+    --lp-text-question: var(--text-md);
+    --lp-card-padding-lg: var(--atomic-20);
+    --lp-modal-width: 100%;
+  }
+}

@@ -1,0 +1,28 @@
+@import 'tailwindcss' source(none);
+@source '../**/*.{ts,tsx}';
+
+/* ELT Global design tokens (single source: elt-prototype/packages/tokens) */
+@import '@elt/tokens/design-tokens.css';
+@import '@elt/tokens/theme.css';
+@import '@elt/tokens/themes/triplei.css';
+
+/* Landing-page token layer — every value below aliases a DS token */
+@import './landing-tokens.css';
+@import './landing-patterns.css';
+@import './landing-page.css';
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--col-bg-primary);
+  color: var(--col-content-primary-default);
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--type-font-family-body);
+}
+
+* {
+  box-sizing: border-box;
+}

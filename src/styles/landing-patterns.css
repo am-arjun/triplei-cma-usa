@@ -1,0 +1,93 @@
+/* Concentric-arc pattern used on orange sections */
+.lp-arcs {
+  position: relative;
+  isolation: isolate;
+  background: var(--lp-brand-gradient);
+}
+.lp-arcs::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: repeating-radial-gradient(
+    circle at 18% 118%,
+    transparent 0,
+    transparent 54px,
+    var(--lp-brand-arc-line) 54px,
+    var(--lp-brand-arc-line) 56px
+  );
+  opacity: 0.55;
+}
+
+/* Warm dark card used by the "Career related doubts?" block.
+   The line pattern is the supplied SVG (white strokes, 10% opacity, overlay)
+   served from public/patterns/ so it can be swapped without a rebuild. */
+.lp-dark-arcs {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(90% 80% at 50% 110%, var(--lp-dark-glow) 0%, transparent 70%),
+    linear-gradient(var(--lp-dark-tint), var(--lp-dark-tint)),
+    var(--col-surface-primary-default);
+}
+.lp-dark-arcs::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: url('/patterns/doubts-pattern.svg') center / cover no-repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Horizontal logo marquee */
+@keyframes lp-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.lp-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: lp-marquee var(--lp-marquee-duration, 40s) linear infinite;
+}
+.lp-marquee-track[data-direction='reverse'] {
+  animation-direction: reverse;
+}
+.lp-marquee:hover .lp-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-marquee-track { animation: none; }
+}
+
+/* Accordion height animation */
+.lp-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-duration-base) var(--motion-ease-standard);
+}
+.lp-collapse[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+.lp-collapse > div {
+  overflow: hidden;
+}
+
+/* Modal — fade + scale 0.98→1 per vault/motion.md (base duration) */
+@keyframes lp-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes lp-modal-in {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.lp-modal-overlay {
+  animation: lp-overlay-in var(--motion-duration-base) var(--motion-ease-standard) both;
+}
+.lp-modal-panel {
+  animation: lp-modal-in var(--motion-duration-base) var(--motion-ease-decelerate) both;
+}
