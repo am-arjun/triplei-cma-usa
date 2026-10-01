@@ -60,11 +60,11 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(var(--prim-neutral-200) 1px, transparent 1px);
+  background-image: radial-gradient(var(--prim-neutral-300) 1.1px, transparent 1.1px);
   background-size: var(--atomic-24) var(--atomic-24);
   -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black 0%, transparent 75%);
   mask-image: radial-gradient(70% 60% at 50% 30%, black 0%, transparent 75%);
-  opacity: 0.7;
+  opacity: 0.8;
 }
 @media (min-width: 768px) { .cm-hero { padding: var(--atomic-28) var(--atomic-48) 0; } }
 
@@ -136,12 +136,50 @@
   .cm-float .cm-tile { width: var(--atomic-48); height: var(--atomic-48); }
   .cm-float dd { font-size: var(--atomic-28); }
   .cm-float dt { font-size: var(--text-sm); }
-  .cm-float--1 { left: 0; top: 10%; transform: rotate(-4deg); }
-  .cm-float--2 { right: 0; top: 36%; transform: rotate(4deg); animation-delay: -2.5s; }
-  .cm-float--3 { left: 6%; bottom: 20%; transform: rotate(3deg); animation-delay: -5s; }
+  /* 1 and 2 pin onto the bottom corner of a photo; 3 counterweights the solo photo bottom-right. */
+  .cm-float--1 { left: 84px; top: 248px; transform: rotate(-3deg); }
+  .cm-float--2 { right: 64px; top: 198px; transform: rotate(3deg); animation-delay: -2.5s; }
+  .cm-float--3 { left: 12px; bottom: 11%; transform: rotate(2deg); animation-delay: -5s; }
 }
 @keyframes cm-bob { 50% { translate: 0 calc(var(--spacing-md) * -1); } }
 @media (prefers-reduced-motion: reduce) { .cm-float { animation: none; } }
+
+/* Decorative hero photos — desktop only; below 1024px the stage is a single
+   stacked column and there is no room to scatter them around the panel.
+   Each photo is a framed "print" (white padding, same radius/shadow as the stat
+   cards) and sits *under* the panel (z 0) so it tucks beneath the form on
+   narrower desktops instead of covering it. Stat cards (z 2) overlap the
+   photo corners like pinned badges. Sizes are decorative, not scale values. */
+.cm-photos { display: none; }
+@media (min-width: 1024px) {
+  .cm-photos { display: block; }
+  .cm-photo {
+    position: absolute;
+    z-index: 0;
+    padding: var(--spacing-sm);
+    border-radius: var(--cr-surface-xlg);
+    background: var(--prim-white);
+    border: 1px solid var(--cm-line);
+    box-shadow: var(--cm-card-shadow);
+    animation: cm-bob 7s var(--motion-ease-standard) infinite;
+  }
+  .cm-photo img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: calc(var(--cr-surface-xlg) - var(--spacing-sm)); }
+  .cm-photo--1 { left: 0; top: 0; width: 232px; height: 292px; transform: rotate(-3deg); animation-delay: -1.2s; }
+  .cm-photo--2 { right: 0; top: 8px; width: 224px; height: 224px; transform: rotate(3deg); animation-delay: -3.6s; }
+  .cm-photo--3 { right: 10px; bottom: 28px; width: 224px; height: 268px; transform: rotate(-2deg); animation-delay: -5.8s; }
+}
+/* 1024–1279: the stage is only ~190–290px either side of the 500px panel, so the
+   full-size clusters would push the stat cards over the form fields. Shrink the
+   prints and pin the cards flush to the stage edge instead. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .cm-photo--1 { width: 180px; height: 228px; }
+  .cm-photo--2 { width: 176px; height: 176px; }
+  .cm-photo--3 { right: 0; width: 176px; height: 212px; }
+  .cm-float--1 { left: 0; top: 196px; }
+  .cm-float--2 { right: 0; top: 150px; }
+  .cm-float--3 { left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .cm-photo { animation: none; } }
 
 /* ── Sections ── */
 .cm-section { padding: var(--cm-section-py) 0; }
@@ -226,9 +264,11 @@
 
 /* Split: sticky rail + content */
 .cm-split { display: grid; gap: var(--atomic-32); align-items: start; }
+.cm-rail-art { display: none; }
 @media (min-width: 1024px) {
   .cm-split { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--atomic-72); }
   .cm-split-rail { position: sticky; top: var(--atomic-40); }
+  .cm-rail-art { display: block; width: 100%; max-width: 440px; height: auto; margin-top: var(--atomic-40); border-radius: var(--cr-surface-xlg); }
 }
 
 /* Why CMA USA: numbered row cards (semantic table) */
@@ -258,6 +298,10 @@
 }
 @media (min-width: 1024px) { .cm-promo { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--atomic-56); align-items: center; } }
 .cm-promo-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--atomic-28); }
+.cm-promo-art { display: none; }
+@media (min-width: 1024px) {
+  .cm-promo-art { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin-top: var(--spacing-md); border-radius: var(--cr-surface-xlg); }
+}
 .cm-ticks { display: flex; flex-direction: column; gap: var(--spacing-lg); margin: 0; padding: 0; list-style: none; }
 .cm-ticks li {
   display: flex;
@@ -300,7 +344,15 @@
 }
 .cm-tile-card .cm-tile { margin-bottom: var(--spacing-lg); }
 .cm-tile-card .cm-card-text { margin: 0; }
-.cm-tile-card--hero { justify-content: flex-end; background: var(--cm-ink); border: none; color: var(--prim-white); }
+.cm-tile-card--hero { position: relative; isolation: isolate; overflow: hidden; justify-content: flex-end; min-height: 320px; background: var(--cm-ink); border: none; color: var(--prim-white); }
+.cm-tile-card-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+.cm-tile-card--hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(16 16 16 / 0.35) 0%, rgb(16 16 16 / 0.6) 45%, rgb(16 16 16 / 0.92) 100%);
+}
 .cm-tile-card--hero .cm-tile { margin-bottom: auto; background: rgb(255 255 255 / 0.1); color: var(--prim-orange-solid-300); }
 .cm-tile-card--hero .cm-card-title { font-size: var(--atomic-28); letter-spacing: -0.03em; }
 .cm-tile-card--hero .cm-card-text { font-size: var(--text-lg); color: var(--prim-neutral-300); }
@@ -319,7 +371,7 @@
 @media (min-width: 768px) { .cm-salary-card { grid-template-columns: auto minmax(0, 1fr); gap: var(--atomic-72); align-items: end; } }
 .cm-salary-card .cm-label { color: var(--cm-muted); }
 .cm-salary-label { margin: var(--spacing-xl) 0 0; font-size: var(--text-md); color: var(--cm-muted); }
-.cm-salary { margin: var(--spacing-2xs) 0 0; font-size: clamp(var(--atomic-44), 5vw, var(--atomic-72)); font-weight: var(--font-weight-bold); letter-spacing: var(--cm-ls-display); line-height: 1; }
+.cm-salary { margin: var(--spacing-2xs) 0 0; font-size: clamp(var(--atomic-44), 5vw, var(--atomic-72)); font-weight: var(--font-weight-bold); letter-spacing: var(--cm-ls-display); line-height: 1; font-variant-numeric: tabular-nums; }
 .cm-salary-range { padding-bottom: var(--spacing-md); }
 .cm-scale { position: relative; height: var(--atomic-10); border-radius: var(--cr-surface-full); background: var(--prim-neutral-100); }
 .cm-scale-fill { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: linear-gradient(90deg, var(--prim-orange-solid-300), var(--cm-brand)); }
@@ -335,6 +387,14 @@
   transform: translate(-50%, -50%);
 }
 .cm-scale-ends { display: flex; justify-content: space-between; margin-top: var(--spacing-xl); font-size: var(--text-sm); font-weight: var(--font-weight-semibold); color: var(--cm-muted); }
+/* Scroll-in: Careers.tsx sets data-phase. The fill/marker start at 0 while "armed" and
+   ease to the average once "in"; the marker then rings once on arrival. Without JS or
+   with reduced motion the phase stays "idle" and the finished state is what renders. */
+.cm-salary-card[data-phase='in'] .cm-scale-fill,
+.cm-salary-card[data-phase='in'] .cm-scale-marker { transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1), left 1.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.cm-scale-marker::after { content: ''; position: absolute; inset: -3px; border-radius: inherit; border: 2px solid var(--cm-brand); opacity: 0; }
+.cm-salary-card[data-phase='in'] .cm-scale-marker::after { animation: cm-ping 0.9s var(--motion-ease-standard) 1.3s 1; }
+@keyframes cm-ping { 0% { opacity: 0.7; transform: scale(1); } 100% { opacity: 0; transform: scale(2.4); } }
 .cm-list { margin: var(--atomic-20) 0 0; padding: 0; list-style: none; }
 .cm-list li { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-xl) 0; font-size: var(--text-md); font-weight: var(--font-weight-medium); }
 .cm-list li + li { border-top: 1px solid var(--cm-line); }
@@ -481,20 +541,12 @@
   color: var(--prim-white);
 }
 .cm-slide[data-active='true'] { width: var(--cm-t-active-w); height: var(--cm-t-active-h); opacity: 1; cursor: default; }
-.cm-slide-monogram {
-  position: absolute;
-  right: 6%;
-  top: 8%;
-  font-size: 180px;
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
-  color: rgb(255 255 255 / 0.07);
-}
+.cm-slide-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .cm-slide::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgb(0 0 0 / 0.55) 100%);
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.05) 0%, rgb(0 0 0 / 0.15) 35%, rgb(0 0 0 / 0.82) 100%);
   pointer-events: none;
 }
 .cm-slide-caption { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; padding: var(--atomic-20); }
@@ -535,3 +587,64 @@
 /* Smooth scroll: native fallback when Lenis is off (reduced motion keeps instant jumps) */
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html.lenis, html.lenis body { height: auto; }
+
+/* ── Motion ──
+   Snappy by design: ~0.45s rises, 60ms stagger, nothing over 0.6s.
+   Scroll reveals are armed by src/lib/reveal.ts; the hero entrance is pure CSS.
+   Reduced motion disables all of it; without JS nothing is ever hidden. */
+:root {
+  --cm-rise-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --cm-rise-dur: 460ms;
+  --cm-rise-y: 18px;
+}
+
+/* Scroll reveal */
+[data-reveal='up'][data-reveal-state='armed'],
+[data-reveal='stagger'][data-reveal-state='armed'] > * { opacity: 0; translate: 0 var(--cm-rise-y); }
+[data-reveal='up'][data-reveal-state='in'],
+[data-reveal='stagger'][data-reveal-state='in'] > * {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity var(--cm-rise-dur) var(--cm-rise-ease), translate var(--cm-rise-dur) var(--cm-rise-ease);
+}
+[data-reveal='stagger'][data-reveal-state='in'] > * { transition-delay: calc(var(--i, 0) * 60ms); }
+/* Table rows: fade only — transforms on <tr> are not reliable everywhere. */
+tbody[data-reveal='stagger'][data-reveal-state='armed'] > tr { translate: 0 0; }
+
+/* Hero entrance (no JS needed) */
+@keyframes cm-rise { from { opacity: 0; translate: 0 var(--cm-rise-y); } to { opacity: 1; translate: 0 0; } }
+@keyframes cm-pop { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  .cm-nav { animation: cm-rise 420ms var(--cm-rise-ease) both; }
+  .cm-hero-copy > * { animation: cm-rise 480ms var(--cm-rise-ease) both; }
+  .cm-hero-copy > :nth-child(1) { animation-delay: 60ms; }
+  .cm-hero-copy > :nth-child(2) { animation-delay: 130ms; }
+  .cm-hero-copy > :nth-child(3) { animation-delay: 200ms; }
+  .cm-hero-copy > :nth-child(4) { animation-delay: 270ms; }
+  .cm-panel { animation: cm-rise 520ms var(--cm-rise-ease) 300ms both; }
+  /* Prints and badges pop in after the panel, then keep bobbing. cm-pop uses scale/opacity so it
+     never fights cm-bob's translate. */
+  .cm-photo, .cm-float { animation-name: cm-pop, cm-bob; animation-duration: 440ms, 7s; animation-timing-function: var(--cm-rise-ease), var(--motion-ease-standard); animation-iteration-count: 1, infinite; animation-fill-mode: both, none; }
+  .cm-photo--1 { animation-delay: 380ms, -1.2s; }
+  .cm-float--1 { animation-delay: 470ms, 0s; }
+  .cm-photo--2 { animation-delay: 430ms, -3.6s; }
+  .cm-float--2 { animation-delay: 520ms, -2.5s; }
+  .cm-photo--3 { animation-delay: 480ms, -5.8s; }
+  .cm-float--3 { animation-delay: 570ms, -5s; }
+}
+/* Below 1024px the floats are static grid items with no bob; keep only the pop. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 1023px) {
+  .cm-float { animation: cm-pop 440ms var(--cm-rise-ease) both; }
+  .cm-float--1 { animation-delay: 380ms; } .cm-float--2 { animation-delay: 440ms; } .cm-float--3 { animation-delay: 500ms; }
+}
+
+/* Hover lifts: quick and small */
+.cm-tile-card, .cm-card, .cm-faq, .cm-float, .cm-photo {
+  transition: transform var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard);
+}
+.cm-tile-card:hover, .cm-card:hover { transform: translateY(-3px); box-shadow: var(--cm-card-shadow); }
+.cm-faq:hover { box-shadow: var(--cm-card-shadow); }
+.cm-btn-arrow { transition: transform var(--motion-duration-fast) var(--motion-ease-standard); }
+.cm-btn:hover .cm-btn-arrow, a:hover > .cm-btn-arrow, button:hover > .cm-btn-arrow { transform: translate(1px, -1px); }
+.cm-list li { transition: color var(--motion-duration-fast); }
+.cm-list li:hover { color: var(--cm-brand); }

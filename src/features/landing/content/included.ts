@@ -1,5 +1,9 @@
+import mentoring from '@/design-system/images/sections/mentoring.jpg'
+
 export const included = {
   title: 'What is included in this program?',
+  /** Photo under the heading on desktop. */
+  image: mentoring,
   items: [
     'Offline, online (hybrid), live and recorded classes',
     'Mentorship from CMA professionals',

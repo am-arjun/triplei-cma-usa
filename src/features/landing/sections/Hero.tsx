@@ -1,7 +1,7 @@
 import type { Icon } from '@tabler/icons-react'
 import { IconBriefcase, IconCheck, IconSchool, IconUsers } from '@tabler/icons-react'
 import { BrandLogo } from '@/design-system'
-import { hero, stats } from '../content/hero'
+import { hero, heroPhotos, stats } from '../content/hero'
 import { getStartedCta } from '../content/ctas'
 import { navLinks } from '../content/nav'
 import { ApplyButton } from './ApplyButton'
@@ -49,6 +49,13 @@ export function Hero() {
         </div>
 
         <div className="cm-stage">
+          <div className="cm-photos" aria-hidden="true">
+            {heroPhotos.map((photo, index) => (
+              <div key={photo.src} className={`cm-photo cm-photo--${index + 1}`}>
+                <img src={photo.src} alt={photo.alt} width={280} height={350} loading="lazy" />
+              </div>
+            ))}
+          </div>
           <dl className="cm-floats">
             {stats.map((stat, index) => {
               const StatIcon = statIcons[index]
