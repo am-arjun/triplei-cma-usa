@@ -18,6 +18,9 @@ Live at https://am-arjun.github.io/triplei-cma-usa/ — served from the `gh-page
 
 ```sh
 pnpm build:pages   # builds with base /triplei-cma-usa/
+# Windows / Git Bash: the script's VAR=x prefix needs a POSIX shell, and MSYS would rewrite
+# the leading slash into a C:/Program Files/Git/... path, so run it as:
+#   MSYS_NO_PATHCONV=1 BASE_PATH=/triplei-cma-usa/ pnpm build && touch dist/.nojekyll
 # then publish dist/ to the gh-pages branch, e.g.:
 cd dist && git init -b gh-pages && git add -A && git commit -m deploy \
   && git push -f https://github.com/am-arjun/triplei-cma-usa.git gh-pages
