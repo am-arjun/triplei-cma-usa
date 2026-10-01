@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@elt/tokens':
-        specifier: link:../GitHub/elt-prototype/packages/tokens
-        version: link:../GitHub/elt-prototype/packages/tokens
+        specifier: link:../elt-prototype/packages/tokens
+        version: link:../elt-prototype/packages/tokens
       '@hookform/resolvers':
         specifier: ^5.2.2
         version: 5.9.1(react-hook-form@7.55.0(react@18.3.1))(zod@4.6.5)

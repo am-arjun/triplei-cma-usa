@@ -11,7 +11,7 @@
     "build:pages": "BASE_PATH=/triplei-cma-usa/ pnpm build && touch dist/.nojekyll"
   },
   "dependencies": {
-    "@elt/tokens": "link:../GitHub/elt-prototype/packages/tokens",
+    "@elt/tokens": "link:../elt-prototype/packages/tokens",
     "@hookform/resolvers": "^5.2.2",
     "@tabler/icons-react": "^3.44.0",
     "clsx": "2.1.1",
