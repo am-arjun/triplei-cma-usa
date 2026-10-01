@@ -51,7 +51,7 @@ export function Testimonials() {
         <SectionHead id="testimonials-title" title={testimonialsSection.title} />
       </Container>
 
-      <div className="cm-carousel" aria-roledescription="carousel" aria-label={testimonialsSection.title}>
+      <div className="cm-carousel" data-reveal="up" aria-roledescription="carousel" aria-label={testimonialsSection.title}>
         <div
           className="cm-carousel-track"
           data-animated={isAnimated}
@@ -68,9 +68,15 @@ export function Testimonials() {
                 aria-hidden={!isActive}
                 onClick={isActive ? undefined : () => goTo(slideIndex)}
               >
-                <span className="cm-slide-monogram" aria-hidden="true">
-                  {slide.name.charAt(0)}
-                </span>
+                <img
+                  className="cm-slide-photo"
+                  src={slide.image}
+                  alt=""
+                  width={600}
+                  height={340}
+                  loading="lazy"
+                  style={{ objectPosition: slide.focus }}
+                />
                 <figcaption className="cm-slide-caption">
                   <blockquote>“{slide.quote}”</blockquote>
                   <p>

@@ -1,8 +1,11 @@
 import type { TableRow } from './benefits'
+import classroom from '@/design-system/images/sections/classroom.jpg'
 
 export const why = {
   title: 'Why Triple i is Kerala’s choice for CMA USA',
   columns: ['Reason', 'What it means for you'] as const,
+  /** Photo behind the dark "Proven results" tile in the bento. */
+  heroImage: classroom,
 }
 
 export const whyRows: TableRow[] = [

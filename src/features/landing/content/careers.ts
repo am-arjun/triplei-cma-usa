@@ -24,6 +24,9 @@ export const salary = {
   heading: 'Salary',
   label: 'Average salary',
   value: '₹24 LPA',
+  /** Numeric part of `value`, for the count-up; `value` stays the prerendered / aria text. */
+  amount: 24,
+  unit: 'LPA',
   min: '₹8 LPA',
   max: '₹64 LPA',
   /** Position of the average marker along the range, 0–1: (24 − 8) / (64 − 8) */

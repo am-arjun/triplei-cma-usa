@@ -1,3 +1,5 @@
+import illustration from '@/design-system/images/why-illustration.png'
+
 export interface TableRow {
   title: string
   description: string
@@ -6,6 +8,8 @@ export interface TableRow {
 export const benefits = {
   title: 'Why students choose CMA USA',
   columns: ['Benefit', 'What it means for you'] as const,
+  /** Decorative brand illustration shown in the sticky rail on desktop. */
+  illustration,
 }
 
 export const benefitRows: TableRow[] = [

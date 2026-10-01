@@ -11,11 +11,14 @@ export function WhyTripleI() {
     <section id="why-triple-i" className="cm-section cm-section--tint" aria-labelledby="why-triple-i-title">
       <Container>
         <SectionHead id="why-triple-i-title" title={why.title} />
-        <ul className="cm-bento">
+        <ul className="cm-bento" data-reveal="stagger">
           {whyRows.map((row, index) => {
             const Icon = icons[index]
             return (
               <li key={row.title} className={index === 0 ? 'cm-tile-card cm-tile-card--hero' : 'cm-tile-card'}>
+                {index === 0 && (
+                  <img className="cm-tile-card-bg" src={why.heroImage} alt="" width={900} height={1100} loading="lazy" />
+                )}
                 <span className="cm-tile" aria-hidden="true">
                   <Icon size={22} stroke={2} />
                 </span>
@@ -25,7 +28,7 @@ export function WhyTripleI() {
             )
           })}
         </ul>
-        <div className="cm-actions cm-actions--center">
+        <div className="cm-actions cm-actions--center" data-reveal="up">
           <ApplyButton />
         </div>
       </Container>
