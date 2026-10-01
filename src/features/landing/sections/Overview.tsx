@@ -12,7 +12,7 @@ export function Overview() {
         <SectionHead id="cma-usa-title" title={overview.title} intro={overview.intro} />
 
         <h3 className="cm-subhead">{overview.audienceTitle}</h3>
-        <ul className="cm-people">
+        <ul className="cm-people" data-reveal="stagger">
           {audience.map((item) => (
             <li key={item.title} className="cm-person">
               <span className="cm-person-halo">
@@ -24,7 +24,7 @@ export function Overview() {
           ))}
         </ul>
 
-        <div className="cm-shift">
+        <div className="cm-shift" data-reveal="stagger">
           <article className="cm-shift-from">
             <span className="cm-emoji" aria-hidden="true">
               {overview.problem.emoji}
@@ -44,7 +44,7 @@ export function Overview() {
           </article>
         </div>
 
-        <div className="cm-actions cm-actions--center">
+        <div className="cm-actions cm-actions--center" data-reveal="up">
           <CounselingButton variant="primary" />
         </div>
       </Container>

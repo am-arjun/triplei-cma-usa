@@ -9,11 +9,11 @@ export function Faqs() {
   return (
     <section id="faqs" className="cm-section" aria-labelledby="faqs-title">
       <Container className="cm-split">
-        <div className="cm-split-rail">
+        <div className="cm-split-rail" data-reveal="up">
           <SectionHead id="faqs-title" title={faqSection.title} align="left" />
           <CounselingButton variant="primary" />
         </div>
-        <div className="cm-faqs">
+        <div className="cm-faqs" data-reveal="stagger">
           {faqs.map((faq, index) => (
             <details key={faq.id} className="cm-faq" open={index === 0}>
               <summary>

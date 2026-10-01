@@ -1,7 +1,7 @@
 # Triple i — CMA USA SEO Landing Page
 
 Lead-generation landing page for Triple i Commerce Academy's CMA USA programme, built on the
-ELT Global design system from `../GitHub/elt-prototype`.
+ELT Global design system from `../elt-prototype`.
 
 ## Run
 
@@ -23,7 +23,7 @@ cd dist && git init -b gh-pages && git add -A && git commit -m deploy \
   && git push -f https://github.com/am-arjun/triplei-cma-usa.git gh-pages
 ```
 
-The build needs `@elt/tokens` from `../GitHub/elt-prototype` (a local `link:` dependency), so it runs
+The build needs `@elt/tokens` from `../elt-prototype` (a local `link:` dependency), so it runs
 locally rather than in GitHub Actions.
 
 ## SEO
@@ -48,14 +48,16 @@ locally rather than in GitHub Actions.
 
 ## Motion
 
+- Scroll reveals and the hero entrance live in `src/lib/reveal.ts` and the "Motion" block of
+  `src/styles/landing-page.css`; nothing is hidden until JS runs, so prerendered HTML is complete.
 - Smooth scrolling uses Lenis (`src/lib/smoothScroll.ts`, ~0.9s ease-out); it pauses while a modal is open and is
   disabled for `prefers-reduced-motion`.
-- Testimonials are a looping centre-mode carousel with a Pause/Play pill. Cards use a monogram background until real
-  student photos are available.
+- Testimonials are a looping centre-mode carousel with a Pause/Play pill. Cards show stills from the students' video
+  testimonials (`src/design-system/images/testimonial-*.png`).
 
 ## How the design system is wired in
 
-- `@elt/tokens` is a **`link:` dependency** to `../GitHub/elt-prototype/packages/tokens`.
+- `@elt/tokens` is a **`link:` dependency** to `../elt-prototype/packages/tokens`.
   If this folder is moved, update the path in `package.json`.
 - `<html data-brand="triplei">` activates the Triple i brand overlay. Dark sections
   (`<Section tone="dark">`) scope the DS `.dark` token set.

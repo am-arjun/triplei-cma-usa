@@ -10,11 +10,13 @@ import { Footer } from './sections/Footer'
 import { StickyCtaBar } from './sections/StickyCtaBar'
 import { useEffect } from 'react'
 import { startSmoothScroll } from '@/lib/smoothScroll'
+import { startReveal } from '@/lib/reveal'
 import { ApplyModalProvider } from './ApplyModal'
 import { StructuredData } from './StructuredData'
 
 export function LandingPage() {
   useEffect(() => startSmoothScroll(), [])
+  useEffect(() => startReveal(), [])
 
   return (
     <ApplyModalProvider>

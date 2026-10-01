@@ -8,7 +8,7 @@ export interface SectionHeadProps {
 /** Section heading: h2 + optional intro. */
 export function SectionHead({ id, title, intro, align = 'center' }: SectionHeadProps) {
   return (
-    <header className={`cm-head cm-head--${align}`}>
+    <header className={`cm-head cm-head--${align}`} data-reveal="up">
       <h2 id={id} className="cm-h2">
         {title}
       </h2>
