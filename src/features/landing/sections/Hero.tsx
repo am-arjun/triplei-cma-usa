@@ -7,6 +7,7 @@ import { navLinks } from '../content/nav'
 import { ApplyButton } from './ApplyButton'
 import { ApplyPanel } from './ApplyPanel'
 import { CounselingButton } from './CounselingButton'
+import { ThemeToggle } from './ThemeToggle'
 
 const statIcons: Icon[] = [IconUsers, IconBriefcase, IconSchool]
 
@@ -25,7 +26,10 @@ export function Hero() {
               </a>
             ))}
           </nav>
-          <ApplyButton size="md" label={getStartedCta.label} />
+          <div className="cm-nav-end">
+            <ThemeToggle />
+            <ApplyButton size="md" label={getStartedCta.label} />
+          </div>
         </header>
 
         <div className="cm-hero-copy">

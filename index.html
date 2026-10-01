@@ -13,6 +13,17 @@
     <meta property="og:title" content="Learn CMA USA from Kerala's Most Trusted Institute with up to 100% Scholarship" />
     <meta property="og:description" content="Become a globally recognised Certified Management Accountant and build a finance career anywhere in the world." />
     <meta name="twitter:card" content="summary" />
+    <!-- Apply the theme before the stylesheet paints so there is no light→dark flash.
+         Order: ?theme= in the URL, then the saved choice (lp:theme), then the OS setting. -->
+    <script>
+      ;(function () {
+        try {
+          var q = new URLSearchParams(location.search).get('theme')
+          var t = q === 'dark' || q === 'light' ? q : localStorage.getItem('lp:theme')
+          if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

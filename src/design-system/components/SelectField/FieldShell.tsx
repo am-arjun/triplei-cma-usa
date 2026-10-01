@@ -32,7 +32,8 @@ export function FieldShell({ id, label, error, headIcon, tailIcon, appearance = 
           height: 'var(--lp-input-height)',
           borderRadius: 'var(--lp-input-radius)',
           border: `1px solid ${error ? 'var(--col-stroke-destructive)' : isFilled ? 'transparent' : 'var(--col-stroke-secondary)'}`,
-          background: isFilled ? 'var(--prim-neutral-50)' : 'var(--col-bg-primary)',
+          // --lp-field-bg lets the page pick a field tone that contrasts with its card (see landing-page.css .dark)
+          background: isFilled ? 'var(--lp-field-bg, var(--col-surface-secondary-default))' : 'var(--col-bg-primary)',
           transitionDuration: 'var(--motion-duration-fast)',
         }}
       >

@@ -19,9 +19,23 @@
   --cm-soft-gradient: linear-gradient(135deg, var(--prim-neutral-25) 0%, var(--prim-neutral-50) 100%);
   --lp-input-height: var(--atomic-44);
   --lp-container-max: 1200px;
+  /* Surfaces — redefined under .dark below; components must use these, not --prim-* */
+  color-scheme: light;
+  --cm-page-bg: var(--prim-white);
+  --cm-surface: var(--prim-white);
+  --cm-text-soft: var(--prim-neutral-700);
+  --cm-line-strong: var(--prim-neutral-300);
+  --cm-track: var(--prim-neutral-100);
+  --cm-dots: var(--prim-neutral-300);
+  --cm-hero-glow: var(--prim-orange-solid-100);
+  --cm-hero-from: var(--prim-white);
+  --cm-hero-mid: var(--prim-neutral-25);
+  --cm-hero-to: var(--prim-neutral-50);
+  /* Filled form fields (DS FieldShell reads this); must contrast with --cm-surface */
+  --lp-field-bg: var(--col-surface-secondary-default);
 }
 
-.cm-page { background: var(--prim-white); color: var(--cm-ink); }
+.cm-page { background: var(--cm-page-bg); color: var(--cm-ink); }
 
 /* ── Buttons: pill + round arrow ── */
 .cm-btn { font-weight: var(--font-weight-semibold); }
@@ -51,8 +65,8 @@
   border-radius: var(--cm-panel-radius);
   border: 1px solid var(--cm-line);
   background:
-    radial-gradient(38% 42% at 50% 88%, var(--prim-orange-solid-100) 0%, transparent 70%),
-    linear-gradient(180deg, var(--prim-white) 0%, var(--prim-neutral-25) 45%, var(--prim-neutral-50) 100%);
+    radial-gradient(38% 42% at 50% 88%, var(--cm-hero-glow) 0%, transparent 70%),
+    linear-gradient(180deg, var(--cm-hero-from) 0%, var(--cm-hero-mid) 45%, var(--cm-hero-to) 100%);
   overflow: hidden;
 }
 .cm-hero::before {
@@ -60,7 +74,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(var(--prim-neutral-300) 1.1px, transparent 1.1px);
+  background-image: radial-gradient(var(--cm-dots) 1.1px, transparent 1.1px);
   background-size: var(--atomic-24) var(--atomic-24);
   -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black 0%, transparent 75%);
   mask-image: radial-gradient(70% 60% at 50% 30%, black 0%, transparent 75%);
@@ -74,7 +88,7 @@
   gap: var(--atomic-36);
   padding: var(--spacing-xl) var(--atomic-36);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   box-shadow: var(--cm-card-shadow);
 }
@@ -87,10 +101,10 @@
 .cm-h1-accent { font: inherit; letter-spacing: inherit; color: var(--cm-brand); }
 .cm-lead { max-width: 620px; margin: var(--atomic-24) auto 0; font-size: clamp(var(--text-md), 1.5vw, var(--text-xl)); line-height: 1.55; color: var(--cm-muted); }
 .cm-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-lg) var(--atomic-24); margin: var(--atomic-28) 0 0; padding: 0; list-style: none; }
-.cm-pills li { display: inline-flex; align-items: center; gap: var(--spacing-xs); font-size: var(--text-sm); font-weight: var(--font-weight-medium); color: var(--prim-neutral-700); }
+.cm-pills li { display: inline-flex; align-items: center; gap: var(--spacing-xs); font-size: var(--text-sm); font-weight: var(--font-weight-medium); color: var(--cm-text-soft); }
 .cm-pills svg { color: var(--cm-brand); }
 
-.cm-stage { position: relative; max-width: 1080px; margin: clamp(var(--atomic-40), 5vw, var(--atomic-72)) auto 0; padding-bottom: var(--atomic-40); }
+.cm-stage { position: relative; max-width: 1180px; margin: clamp(var(--atomic-40), 5vw, var(--atomic-72)) auto 0; padding-bottom: var(--atomic-40); }
 @media (min-width: 768px) { .cm-stage { padding-bottom: var(--atomic-72); } }
 .cm-panel {
   position: relative;
@@ -99,7 +113,7 @@
   margin: 0 auto;
   padding: var(--atomic-32);
   border-radius: var(--cm-card-radius);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   box-shadow: 0 30px 70px -28px rgb(16 16 16 / 0.22);
   scroll-margin-top: var(--atomic-24);
@@ -114,7 +128,7 @@
   gap: var(--spacing-md);
   padding: var(--spacing-xl);
   border-radius: var(--cr-surface-xlg);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   box-shadow: var(--cm-card-shadow);
   text-align: center;
@@ -137,8 +151,8 @@
   .cm-float dd { font-size: var(--atomic-28); }
   .cm-float dt { font-size: var(--text-sm); }
   /* 1 and 2 pin onto the bottom corner of a photo; 3 counterweights the solo photo bottom-right. */
-  .cm-float--1 { left: 84px; top: 248px; transform: rotate(-3deg); }
-  .cm-float--2 { right: 64px; top: 198px; transform: rotate(3deg); animation-delay: -2.5s; }
+  .cm-float--1 { left: 60px; top: 248px; transform: rotate(-3deg); }
+  .cm-float--2 { right: 44px; top: 198px; transform: rotate(3deg); animation-delay: -2.5s; }
   .cm-float--3 { left: 12px; bottom: 11%; transform: rotate(2deg); animation-delay: -5s; }
 }
 @keyframes cm-bob { 50% { translate: 0 calc(var(--spacing-md) * -1); } }
@@ -158,7 +172,7 @@
     z-index: 0;
     padding: var(--spacing-sm);
     border-radius: var(--cr-surface-xlg);
-    background: var(--prim-white);
+    background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     box-shadow: var(--cm-card-shadow);
     animation: cm-bob 7s var(--motion-ease-standard) infinite;
@@ -200,7 +214,7 @@
   flex-direction: column;
   padding: var(--atomic-28);
   border-radius: var(--cm-card-radius);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   box-shadow: var(--cm-card-shadow);
 }
@@ -229,23 +243,23 @@
   gap: var(--atomic-20);
   padding: var(--atomic-32) var(--atomic-24);
   border-radius: var(--cm-card-radius);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   text-align: center;
   transition: transform var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-base);
 }
 .cm-person:hover { transform: translateY(-4px); box-shadow: var(--cm-card-shadow); }
 .cm-person-halo { padding: var(--spacing-2xs); border-radius: var(--cr-surface-full); border: 1px solid var(--cm-line); }
-.cm-person-halo img { display: block; width: var(--atomic-104); height: var(--atomic-104); border-radius: var(--cr-surface-full); object-fit: cover; clip-path: circle(46.5% at 50% 50%); }
+.cm-person-halo img { display: block; width: var(--atomic-104); height: var(--atomic-104); border-radius: var(--cr-surface-full); object-fit: cover; clip-path: circle(45% at 51% 49.5%); }
 .cm-person h4 { margin: 0; font-size: var(--text-xl); font-weight: var(--font-weight-bold); letter-spacing: -0.02em; }
 
 /* Problem → outcome */
 .cm-shift { display: grid; gap: var(--spacing-2xl); margin-top: var(--atomic-56); align-items: stretch; }
 @media (min-width: 768px) { .cm-shift { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); } }
 .cm-shift-from, .cm-shift-to { padding: var(--atomic-32); border-radius: var(--cm-card-radius); }
-.cm-shift-from { background: var(--prim-neutral-25); border: 1px dashed var(--prim-neutral-300); }
-.cm-shift-to { background: var(--prim-white); border: 1px solid var(--cm-line); box-shadow: var(--cm-card-shadow); }
-.cm-shift-to .cm-card-text { color: var(--prim-neutral-800); }
+.cm-shift-from { background: var(--cm-tint); border: 1px dashed var(--cm-line-strong); }
+.cm-shift-to { background: var(--cm-surface); border: 1px solid var(--cm-line); box-shadow: var(--cm-card-shadow); }
+.cm-shift-to .cm-card-text { color: var(--cm-text-soft); }
 .cm-shift-arrow {
   display: inline-flex;
   align-self: center;
@@ -255,7 +269,7 @@
   width: var(--atomic-48);
   height: var(--atomic-48);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   box-shadow: var(--cm-card-shadow);
   color: var(--cm-ink);
@@ -273,7 +287,7 @@
 
 /* Why CMA USA: numbered row cards (semantic table) */
 .cm-rows { width: 100%; border-collapse: separate; border-spacing: 0 var(--spacing-xl); margin: calc(var(--spacing-xl) * -1) 0; }
-.cm-rows tr { background: var(--prim-white); box-shadow: var(--cm-card-shadow); }
+.cm-rows tr { background: var(--cm-surface); box-shadow: var(--cm-row-shadow, var(--cm-card-shadow)); }
 .cm-rows td, .cm-rows th { padding: var(--atomic-24) var(--atomic-20); text-align: left; vertical-align: top; }
 .cm-rows td:first-child { border-radius: var(--cm-card-radius) 0 0 var(--cm-card-radius); padding-left: var(--atomic-24); }
 .cm-rows td:last-child { border-radius: 0 var(--cm-card-radius) var(--cm-card-radius) 0; padding-right: var(--atomic-28); }
@@ -293,7 +307,7 @@
   gap: var(--atomic-32);
   padding: clamp(var(--atomic-32), 5vw, var(--atomic-60));
   border-radius: var(--cm-panel-radius);
-  background: var(--prim-neutral-25);
+  background: var(--cm-tint);
   border: 1px solid var(--cm-line);
 }
 @media (min-width: 1024px) { .cm-promo { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--atomic-56); align-items: center; } }
@@ -309,7 +323,7 @@
   gap: var(--spacing-xl);
   padding: var(--spacing-xl) var(--atomic-20);
   border-radius: var(--cr-surface-xlg);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   font-size: var(--text-md);
   font-weight: var(--font-weight-medium);
@@ -339,12 +353,12 @@
   gap: var(--spacing-lg);
   padding: var(--atomic-28);
   border-radius: var(--cm-card-radius);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
 }
 .cm-tile-card .cm-tile { margin-bottom: var(--spacing-lg); }
 .cm-tile-card .cm-card-text { margin: 0; }
-.cm-tile-card--hero { position: relative; isolation: isolate; overflow: hidden; justify-content: flex-end; min-height: 320px; background: var(--cm-ink); border: none; color: var(--prim-white); }
+.cm-tile-card--hero { position: relative; isolation: isolate; overflow: hidden; justify-content: flex-end; min-height: 320px; background: var(--prim-neutral-900); border: none; color: var(--prim-white); }
 .cm-tile-card-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
 .cm-tile-card--hero::before {
   content: '';
@@ -363,7 +377,7 @@
   gap: var(--atomic-28);
   padding: clamp(var(--atomic-28), 4vw, var(--atomic-48));
   border-radius: var(--cm-panel-radius);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   box-shadow: var(--cm-card-shadow);
   color: var(--cm-ink);
@@ -373,7 +387,7 @@
 .cm-salary-label { margin: var(--spacing-xl) 0 0; font-size: var(--text-md); color: var(--cm-muted); }
 .cm-salary { margin: var(--spacing-2xs) 0 0; font-size: clamp(var(--atomic-44), 5vw, var(--atomic-72)); font-weight: var(--font-weight-bold); letter-spacing: var(--cm-ls-display); line-height: 1; font-variant-numeric: tabular-nums; }
 .cm-salary-range { padding-bottom: var(--spacing-md); }
-.cm-scale { position: relative; height: var(--atomic-10); border-radius: var(--cr-surface-full); background: var(--prim-neutral-100); }
+.cm-scale { position: relative; height: var(--atomic-10); border-radius: var(--cr-surface-full); background: var(--cm-track); }
 .cm-scale-fill { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: linear-gradient(90deg, var(--prim-orange-solid-300), var(--cm-brand)); }
 .cm-scale-marker {
   position: absolute;
@@ -381,7 +395,7 @@
   width: var(--atomic-22);
   height: var(--atomic-22);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 3px solid var(--cm-brand);
   box-shadow: 0 0 0 6px rgb(246 102 22 / 0.15);
   transform: translate(-50%, -50%);
@@ -398,11 +412,11 @@
 .cm-list { margin: var(--atomic-20) 0 0; padding: 0; list-style: none; }
 .cm-list li { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-xl) 0; font-size: var(--text-md); font-weight: var(--font-weight-medium); }
 .cm-list li + li { border-top: 1px solid var(--cm-line); }
-.cm-list svg { color: var(--prim-neutral-300); }
+.cm-list svg { color: var(--cm-line-strong); }
 
 /* FAQ */
 .cm-faqs { display: flex; flex-direction: column; gap: var(--spacing-lg); }
-.cm-faq { border-radius: var(--cr-surface-xlg); background: var(--prim-white); border: 1px solid var(--cm-line); transition: box-shadow var(--motion-duration-base); }
+.cm-faq { border-radius: var(--cr-surface-xlg); background: var(--cm-surface); border: 1px solid var(--cm-line); transition: box-shadow var(--motion-duration-base); }
 .cm-faq[open] { box-shadow: var(--cm-card-shadow); }
 .cm-faq summary { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-2xl); padding: var(--atomic-20) var(--atomic-24); cursor: pointer; list-style: none; }
 .cm-faq summary::-webkit-details-marker { display: none; }
@@ -412,7 +426,7 @@
 .cm-faq p { margin: 0; padding: 0 var(--atomic-24) var(--atomic-24); font-size: var(--text-md); line-height: 1.6; color: var(--cm-muted); }
 
 /* Footer (light) */
-.cm-footer { padding: var(--atomic-56) 0 var(--atomic-32); border-top: 1px solid var(--cm-line); background: var(--prim-neutral-25); }
+.cm-footer { padding: var(--atomic-56) 0 var(--atomic-32); border-top: 1px solid var(--cm-line); background: var(--cm-tint); }
 .cm-footer ul { display: flex; flex-direction: column; gap: var(--spacing-xl); margin: var(--atomic-20) 0 0; padding: 0; list-style: none; }
 .cm-footer li, .cm-footer a { display: inline-flex; align-items: center; gap: var(--spacing-md); font-size: var(--text-md); color: var(--cm-ink); }
 .cm-footer svg { color: var(--prim-neutral-400); }
@@ -436,7 +450,7 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-sm);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   box-shadow: 0 12px 40px -8px rgb(16 16 16 / 0.3);
   transition: transform var(--motion-duration-base) var(--motion-ease-standard), opacity var(--motion-duration-base);
 }
@@ -449,7 +463,7 @@
   width: var(--lp-btn-height-lg);
   height: var(--lp-btn-height-lg);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-neutral-50);
+  background: var(--cm-tint);
   color: var(--cm-ink);
 }
 .cm-sticky-icon--wa { background: var(--col-surface-success-default); color: var(--prim-white); }
@@ -474,7 +488,7 @@
   height: var(--atomic-52);
   margin-bottom: var(--atomic-20);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   border: 1px solid var(--cm-line);
   font-size: var(--atomic-28);
   line-height: 1;
@@ -487,7 +501,7 @@
 /* Lead form (hero + popup) */
 .cm-form { display: flex; flex-direction: column; gap: var(--spacing-2xl); }
 .cm-form-foot { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-lg); margin-top: var(--spacing-2xl); }
-.cm-form-foot p { margin: 0; font-size: var(--text-xs); color: var(--prim-neutral-700); }
+.cm-form-foot p { margin: 0; font-size: var(--text-xs); color: var(--cm-text-soft); }
 .lp-modal-panel h3 { font-size: var(--text-xl) !important; font-weight: var(--font-weight-bold) !important; }
 
 /* Testimonials: centre-mode carousel */
@@ -574,7 +588,7 @@
   height: var(--atomic-28);
   padding: 0 var(--spacing-xl);
   border-radius: var(--cr-surface-full);
-  background: var(--prim-white);
+  background: var(--cm-surface);
   color: var(--cm-ink);
   font-size: var(--text-xs);
   font-weight: var(--font-weight-medium);
@@ -648,3 +662,65 @@ tbody[data-reveal='stagger'][data-reveal-state='armed'] > tr { translate: 0 0; }
 .cm-btn:hover .cm-btn-arrow, a:hover > .cm-btn-arrow, button:hover > .cm-btn-arrow { transform: translate(1px, -1px); }
 .cm-list li { transition: color var(--motion-duration-fast); }
 .cm-list li:hover { color: var(--cm-brand); }
+
+/* ── Dark mode ──
+   `.dark` on <html> (design-system convention; see index.html and ThemeToggle.tsx).
+   Only the aliases change: page 900, section tint 800, cards 750, lines 700. */
+.dark {
+  color-scheme: dark;
+  --cm-ink: var(--prim-neutral-50);
+  --cm-muted: var(--prim-neutral-400);
+  --cm-line: var(--prim-neutral-700);
+  --cm-line-strong: var(--prim-neutral-600);
+  --cm-tint: var(--prim-neutral-800);
+  --cm-page-bg: var(--prim-neutral-900);
+  --cm-surface: var(--prim-neutral-750);
+  --cm-text-soft: var(--prim-neutral-300);
+  --cm-track: var(--prim-neutral-700);
+  --cm-dots: var(--prim-neutral-650);
+  --cm-brand-soft: rgb(246 102 22 / 0.16);
+  /* Paper in the dark: a hairline ring and a lit top edge do what the soft shadow does in light. */
+  --cm-card-shadow: 0 0 0 1px rgb(255 255 255 / 0.07), inset 0 1px 0 rgb(255 255 255 / 0.06), 0 2px 4px rgb(0 0 0 / 0.45), 0 18px 40px -18px rgb(0 0 0 / 0.9);
+  --cm-hero-glow: rgb(246 102 22 / 0.22);
+  --cm-hero-from: var(--prim-neutral-900);
+  --cm-hero-mid: var(--prim-neutral-800);
+  --cm-hero-to: var(--prim-neutral-800);
+  --lp-field-bg: var(--prim-neutral-900);
+}
+.dark .cm-panel { box-shadow: 0 30px 70px -28px rgb(0 0 0 / 0.8); }
+.dark .cm-rail-art { opacity: 0.92; }
+
+/* Theme toggle (in the hero nav) */
+.cm-nav-end { display: flex; align-items: center; gap: var(--spacing-md); }
+.cm-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--atomic-40);
+  height: var(--atomic-40);
+  padding: 0;
+  border-radius: var(--cr-surface-full);
+  background: var(--cm-surface);
+  border: 1px solid var(--cm-line);
+  color: var(--cm-muted);
+  box-shadow: var(--cm-card-shadow);
+  cursor: pointer;
+  transition: color var(--motion-duration-fast), transform var(--motion-duration-base) var(--motion-ease-standard), background var(--motion-duration-base);
+}
+.cm-theme-toggle:hover { color: var(--cm-ink); transform: translateY(-1px); }
+.cm-theme-toggle:focus-visible { outline: 2px solid var(--cm-brand); outline-offset: 2px; }
+.cm-theme-toggle svg { transition: transform 320ms var(--cm-rise-ease); }
+.cm-theme-toggle:active svg { transform: rotate(-30deg) scale(0.9); }
+
+/* Dark rows: a <tr> is a plain rectangle (the rounding is on its end cells), so the ring/edge
+   in --cm-card-shadow would outline a box. Rows take a ring-free shadow and draw the hairline
+   with cell borders instead. Below the table breakpoint the row is a grid card with its own
+   radius, so the shared card shadow is correct there. */
+.dark .cm-rows { --cm-row-shadow: 0 2px 4px rgb(0 0 0 / 0.45), 0 18px 40px -18px rgb(0 0 0 / 0.9); }
+.dark .cm-rows td, .dark .cm-rows th { border-top: 1px solid var(--cm-line); border-bottom: 1px solid var(--cm-line); }
+.dark .cm-rows td:first-child { border-left: 1px solid var(--cm-line); }
+.dark .cm-rows td:last-child { border-right: 1px solid var(--cm-line); }
+@media (max-width: 767px) {
+  .dark .cm-rows { --cm-row-shadow: var(--cm-card-shadow); }
+  .dark .cm-rows td, .dark .cm-rows th { border: 0; }
+}

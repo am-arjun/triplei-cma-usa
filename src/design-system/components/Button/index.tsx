@@ -31,7 +31,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     'bg-[var(--col-surface-brand-default)] text-[var(--col-content-primary-static)] shadow-[var(--elevation-btn)] hover:bg-[var(--btn-primary-surface-hover)]',
   inverted:
-    'bg-[var(--prim-white)] text-[var(--prim-neutral-900)] shadow-[var(--elevation-btn)] hover:bg-[var(--prim-neutral-50)]',
+    'bg-[var(--col-surface-primary-default)] text-[var(--col-content-primary-default)] shadow-[var(--elevation-btn)] hover:bg-[var(--col-surface-secondary-default)]',
   secondary:
     'bg-[var(--col-btn-secondary-surface-default)] text-[var(--col-btn-secondary-content-default)] border border-[var(--col-stroke-secondary)] shadow-[var(--elevation-btn)] hover:bg-[var(--col-btn-secondary-surface-hover)]',
   ghost:
