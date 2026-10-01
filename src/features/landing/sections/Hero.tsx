@@ -32,6 +32,12 @@ export function Hero() {
           </div>
         </header>
 
+        <div className="cm-hero-banner" aria-hidden="true">
+          {heroPhotos.map((photo) => (
+            <img key={photo.src} src={photo.src} alt={photo.alt} width={560} height={700} />
+          ))}
+        </div>
+
         <div className="cm-hero-copy">
           <h1 id="hero-title" className="cm-h1">
             {hero.title.lead}
