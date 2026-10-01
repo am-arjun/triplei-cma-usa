@@ -195,6 +195,22 @@
 }
 @media (prefers-reduced-motion: reduce) { .cm-photo { animation: none; } }
 
+/* Below 1024px the scattered prints are hidden, so the same photos open the hero as a
+   16:9 collage above the heading: one tall photo left, two stacked right. */
+.cm-hero-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--spacing-sm);
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  margin: var(--atomic-24) auto 0;
+}
+.cm-hero-banner img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; border-radius: var(--cr-surface-lg); }
+.cm-hero-banner img:first-child { grid-row: span 2; }
+.cm-hero-banner + .cm-hero-copy { padding-top: var(--atomic-32); }
+@media (min-width: 1024px) { .cm-hero-banner { display: none; } }
+
 /* ── Sections ── */
 .cm-section { padding: var(--cm-section-py) 0; }
 .cm-section--tint { background: var(--cm-tint); }
@@ -278,11 +294,11 @@
 
 /* Split: sticky rail + content */
 .cm-split { display: grid; gap: var(--atomic-32); align-items: start; }
-.cm-rail-art { display: none; }
+.cm-rail-art { display: block; width: 100%; max-width: 440px; height: auto; margin-top: var(--atomic-32); border-radius: var(--cr-surface-xlg); }
 @media (min-width: 1024px) {
   .cm-split { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--atomic-72); }
   .cm-split-rail { position: sticky; top: var(--atomic-40); }
-  .cm-rail-art { display: block; width: 100%; max-width: 440px; height: auto; margin-top: var(--atomic-40); border-radius: var(--cr-surface-xlg); }
+  .cm-rail-art { margin-top: var(--atomic-40); }
 }
 
 /* Why CMA USA: numbered row cards (semantic table) */
@@ -312,10 +328,7 @@
 }
 @media (min-width: 1024px) { .cm-promo { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--atomic-56); align-items: center; } }
 .cm-promo-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--atomic-28); }
-.cm-promo-art { display: none; }
-@media (min-width: 1024px) {
-  .cm-promo-art { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin-top: var(--spacing-md); border-radius: var(--cr-surface-xlg); }
-}
+.cm-promo-art { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin-top: var(--spacing-md); border-radius: var(--cr-surface-xlg); }
 .cm-ticks { display: flex; flex-direction: column; gap: var(--spacing-lg); margin: 0; padding: 0; list-style: none; }
 .cm-ticks li {
   display: flex;
@@ -630,7 +643,7 @@ tbody[data-reveal='stagger'][data-reveal-state='armed'] > tr { translate: 0 0; }
 @keyframes cm-pop { from { opacity: 0; scale: 0.92; } to { opacity: 1; scale: 1; } }
 @media (prefers-reduced-motion: no-preference) {
   .cm-nav { animation: cm-rise 420ms var(--cm-rise-ease) both; }
-  .cm-hero-copy > * { animation: cm-rise 480ms var(--cm-rise-ease) both; }
+  .cm-hero-banner, .cm-hero-copy > * { animation: cm-rise 480ms var(--cm-rise-ease) both; }
   .cm-hero-copy > :nth-child(1) { animation-delay: 60ms; }
   .cm-hero-copy > :nth-child(2) { animation-delay: 130ms; }
   .cm-hero-copy > :nth-child(3) { animation-delay: 200ms; }
